@@ -3,10 +3,12 @@ import Header from './common/Header';
 import Main from './common/Main';
 import List from './community/List';
 import Create from './community/Create';
+import GlobalStyle from './GlobalStyle';
 
 function App() {
 	return (
 		<>
+			<GlobalStyle />
 			<Header />
 
 			<Routes>
