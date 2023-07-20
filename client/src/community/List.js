@@ -1,5 +1,7 @@
+import Layout from '../common/Layout';
+
 function List() {
-	return <section>List</section>;
+	return <Layout name={'List'}>List</Layout>;
 }
 
 export default List;
