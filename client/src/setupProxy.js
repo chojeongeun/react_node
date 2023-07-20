@@ -9,3 +9,5 @@ module.exports = (app) => {
 		})
 	);
 };
+
+//정해져있는 코드

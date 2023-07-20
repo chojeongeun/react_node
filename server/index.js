@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 const port = 5000;
 
-//클라리언트로 부터 보내진 데이터를 전달받도록 설정 (body-parser)
+//클라이언트로 부터 보내진 데이터를 전달받도록 설정 (body-parser)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.listen(port, () => {
+	//db설정하기 위해 미리 설정해둠
 	mongoose
 		.connect('mongodb+srv://juy0816:!abcd1234@cluster0.e6eepiz.mongodb.net/')
 		//접속 성공시
@@ -33,3 +34,4 @@ app.post('/api/send', (req, res) => {
 	console.log(req.body);
 	res.json({ success: true, result: req.body.name + '2' });
 });
+//
