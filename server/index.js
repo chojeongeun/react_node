@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
 const port = 5000;
+const { Post } = require('./model/postSchema.js');
 
 //클라이언트로 부터 보내진 데이터를 전달받도록 설정 (body-parser)
 app.use(express.json());
@@ -31,6 +32,14 @@ app.get('*', (req, res) => {
 
 //create
 app.post('/api/create', (req, res) => {
-	console.log(req.body);
-	res.json({ success: true });
+	//PostSchema가 적용된 Post모델 생성자를 통해 저장 모델 인스턴스 생성
+	const PostModel = new Post({
+		title: req.body.title,
+		content: req.body.content,
+	});
+
+	//생성된 모델 인스턴스로 부터 save명령어로 DB저장 (Promise반환)
+	PostModel.save()
+		.then(() => res.json({ success: true }))
+		.catch(() => res.json({ success: false }));
 });

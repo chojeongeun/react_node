@@ -15,5 +15,5 @@ const postSchema = new mongoose.Schema({
 });
 
 //게시글 스키마 구조가 적용된 모델 생성자를 만든 뒤 내보냄(export)
-const post = mongoose.model('Post', postSchema);
+const Post = mongoose.model('Post', postSchema);
 module.exports = { Post };
