@@ -29,9 +29,8 @@ app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-//리액트로부터 전달된 요청 라우터
-app.post('/api/send', (req, res) => {
+//create
+app.post('/api/create', (req, res) => {
 	console.log(req.body);
-	res.json({ success: true, result: req.body.name + '2' });
+	res.json({ success: true });
 });
-//
