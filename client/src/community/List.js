@@ -7,7 +7,7 @@ function List() {
 	const [Posts, setPosts] = useState([]);
 
 	useEffect(() => {
-		axios.post('/api/read').then((res) => {
+		axios.get('/api/community/read').then((res) => {
 			console.log(res);
 			setPosts(res.data.communityList);
 		});
