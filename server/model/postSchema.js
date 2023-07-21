@@ -9,7 +9,7 @@
 const mongoose = require('mongoose');
 
 //게시글 객체가 저장될 스키마 구조를 생성
-const postSchema = new mongoose.Schema(
+const postShema = new mongoose.Schema(
 	{
 		title: String,
 		content: String,
@@ -19,5 +19,5 @@ const postSchema = new mongoose.Schema(
 );
 
 //게시글 스키마 구조가 적용된 모델 생성자를 만든 뒤 내보냄(export)
-const Post = mongoose.model('Post', postSchema);
+const Post = mongoose.model('Post', postShema);
 module.exports = { Post };
