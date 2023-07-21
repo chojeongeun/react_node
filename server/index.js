@@ -46,7 +46,7 @@ app.post('/api/create', (req, res) => {
 
 //read
 app.post('/api/read', (req, res) => {
-	Post.find()
+	Post.find() //호출
 		.exec()
 		.then((doc) => {
 			console.log(doc);
