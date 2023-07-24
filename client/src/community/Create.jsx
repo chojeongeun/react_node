@@ -20,7 +20,6 @@ function Create() {
 				alert('글 저장에 실패했습니다');
 			});
 	};
-	useEffect(() => {}, []);
 
 	return (
 		<Layout name={'Post'}>

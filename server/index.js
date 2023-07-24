@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 //express에서 react안쪽 build폴더까지의 경로를 static으로 지정
 app.use(express.static(path.join(__dirname, '../client/build')));
 
+//커뮤니티 전용 라우터 추가
 app.use('/api/community', require('./router/communityRouter.js'));
 
 app.listen(port, () => {
