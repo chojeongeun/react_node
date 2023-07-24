@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import Layout from '../common/Layout';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+
 /*
   글수정 흐름
   1.Edit컴포넌트 접속하자마자 글 고유번호에 해당하는 데이터를 서버로부터 전달받음
@@ -12,6 +13,7 @@ import { useParams } from 'react-router-dom';
 */
 
 function Edit() {
+	const navigate = useNavigate();
 	const params = useParams();
 	const [Title, setTitle] = useState('');
 	const [Content, setContent] = useState('');
@@ -28,6 +30,7 @@ function Edit() {
 		axios.post('/api/community/edit', item).then((res) => {
 			if (res.data.success) {
 				alert('글 수정이 완료되었습니다.');
+				navigate(-1);
 			} else {
 				alert('글 수정에 실패했습니다.');
 			}
