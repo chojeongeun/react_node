@@ -58,4 +58,14 @@ router.post('/edit', (req, res) => {
 		.catch((err) => res.json({ success: false }));
 });
 
+//글 삭제요청 라우터
+router.post('/delete', (req, res) => {
+	Post.deleteOne({ communityNum: req.body.id })
+		.exec()
+		.then(() => {
+			res.json({ success: true });
+		})
+		.catch(() => res.json({ success: false }));
+});
+
 module.exports = router;
