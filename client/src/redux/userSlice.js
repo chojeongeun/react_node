@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, getDefaultMiddleware } from '@reduxjs/toolkit';
 
 const userSlice = createSlice({
 	name: 'user',
