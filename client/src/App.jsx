@@ -8,8 +8,22 @@ import Detail from './community/Detail';
 import Edit from './community/Edit';
 import Join from './user/Join';
 import Login from './user/Login';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { loginUser, logoutUser } from './redux/userSlice';
+import firebase from './firebase';
 
 function App() {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		firebase.auth().onAuthStateChanged((userInfo) => {
+			console.log(userInfo);
+			if (userInfo === null) dispatch(logoutUser());
+			else dispatch(loginUser(userInfo.multiFactor.user));
+		});
+	}, [dispatch]);
+
 	return (
 		<>
 			<GlobalStyle />

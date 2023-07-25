@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 import Layout from '../common/Layout';
 import { useNavigate } from 'react-router-dom';
 import firebase from '../firebase';
+import styled from 'styled-components';
+
+const BtnSet = styled.nav`
+	display: flex;
+	gap: 20px;
+	margin-left: 20px;
+`;
 
 function Login() {
 	const navigate = useNavigate();
@@ -14,6 +21,7 @@ function Login() {
 
 		try {
 			await firebase.auth().signInWithEmailAndPassword(Email, Pwd);
+			alert('로그인되었습니다.');
 			navigate('/');
 		} catch (err) {
 			//console.log(err.code);
@@ -42,10 +50,10 @@ function Login() {
 				placeholder='비밀번호를 입력하세요.'
 			/>
 
-			<nav>
+			<BtnSet>
 				<button onClick={handleLogin}>로그인</button>
 				<button onClick={() => navigate('/join')}>회원가입</button>
-			</nav>
+			</BtnSet>
 			{Err !== '' && <p>{Err}</p>}
 		</Layout>
 	);

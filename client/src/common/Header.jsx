@@ -1,16 +1,21 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import firebase from '../firebase';
 
 function Header() {
+	const navigate = useNavigate();
 	const activeStyle = { color: 'aqua' };
+	const user = useSelector((store) => store.user);
+	console.log(user);
 
 	const HeaderWrap = styled.header`
 		width: 350px;
 		height: 100vh;
 		background: #222;
 		position: fixed;
-		top: 0px;
-		left: 0px;
+		top: 0;
+		left: 0;
 		padding: 50px;
 	`;
 
@@ -39,12 +44,25 @@ function Header() {
 		gap: 20px;
 
 		li {
+			color: #777;
+
+			em {
+				color: orange;
+			}
+
+			span {
+				cursor: pointer;
+				&:hover {
+					color: hotpink;
+				}
+			}
 			a {
 				font: 14px/1 'arial';
-				color: #555;
+				color: #777;
 			}
 		}
 	`;
+
 	return (
 		<HeaderWrap>
 			<Logo>
@@ -57,26 +75,48 @@ function Header() {
 						Show List
 					</NavLink>
 				</li>
-				<li>
-					<NavLink to='/create' style={(props) => (props.isActive ? activeStyle : null)}>
-						Write Post
-					</NavLink>
-				</li>
+				{user.uid !== '' && (
+					<li>
+						<NavLink to='/create' style={(props) => (props.isActive ? activeStyle : null)}>
+							Write Post
+						</NavLink>
+					</li>
+				)}
 			</Gnb>
 
 			<Util>
-				<li>
-					<NavLink to='/login' style={(props) => (props.isActive ? activeStyle : null)}>
-						Login
-					</NavLink>
-				</li>
-				<li>
-					<NavLink to='/join' style={(props) => (props.isActive ? activeStyle : null)}>
-						Join
-					</NavLink>
-				</li>
+				{user.uid === '' ? (
+					<>
+						<li>
+							<NavLink to='/login' style={(props) => (props.isActive ? activeStyle : null)}>
+								Login
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to='/join' style={(props) => (props.isActive ? activeStyle : null)}>
+								Join
+							</NavLink>
+						</li>
+					</>
+				) : (
+					<>
+						<li>
+							<em>{user.displayName}</em>님 반갑습니다.
+						</li>
+						<li
+							onClick={() => {
+								firebase.auth().signOut();
+								alert('로그아웃되었습니다.');
+								navigate('/');
+							}}
+						>
+							<span>로그아웃</span>
+						</li>
+					</>
+				)}
 			</Util>
 		</HeaderWrap>
 	);
 }
+
 export default Header;
