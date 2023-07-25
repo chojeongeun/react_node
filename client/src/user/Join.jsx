@@ -19,7 +19,7 @@ function Join() {
 	};
 
 	return (
-		<Layout name={'join'}>
+		<Layout name={'Join'}>
 			<input
 				type='email'
 				value={Email}

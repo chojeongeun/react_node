@@ -6,6 +6,7 @@ import Create from './community/Create';
 import GlobalStyle from './GlobalStyle';
 import Detail from './community/Detail';
 import Edit from './community/Edit';
+import Join from './user/Join';
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 				<Route path='/create' element={<Create />} />
 				<Route path='/detail/:id' element={<Detail />} />
 				<Route path='/edit/:id' element={<Edit />} />
+				<Route path='/join' element={<Join />} />
 			</Routes>
 		</>
 	);
