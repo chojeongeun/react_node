@@ -1,8 +1,10 @@
 import Layout from '../common/Layout';
 import { useState } from 'react';
 import firebase from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 function Join() {
+	const navigate = useNavigate();
 	const [Email, setEmail] = useState('');
 	const [Pwd1, setPwd1] = useState('');
 	const [Pwd2, setPwd2] = useState('');
@@ -16,6 +18,8 @@ function Join() {
 		const createdUser = await firebase.auth().createUserWithEmailAndPassword(Email, Pwd1);
 		await createdUser.user.updateProfile({ displayName: Name });
 		console.log(createdUser.user);
+		alert('성공적으로 회원가입되었습니다.');
+		navigate('/login');
 	};
 
 	return (
@@ -44,6 +48,7 @@ function Join() {
 				placeholder='사용자 이름을 입력하세요.'
 				onChange={(e) => setName(e.target.value)}
 			/>
+			<button onClick={() => navigate(-1)}>취소</button>
 			<button onClick={handleJoin}>회원가입</button>
 		</Layout>
 	);
