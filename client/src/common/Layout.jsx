@@ -20,6 +20,8 @@ const MainWrap = styled.main`
 				margin-bottom: 5px;
 			}
 			input[type='text'],
+			input[type='password'],
+			input[type='email'],
 			textarea {
 				width: 50%;
 				padding: 5px 8px;

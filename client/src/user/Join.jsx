@@ -2,6 +2,13 @@ import Layout from '../common/Layout';
 import { useState } from 'react';
 import firebase from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+const BtnSet = styled.nav`
+	margin-top: 20px;
+	display: flex;
+	gap: 20px;
+`;
 
 function Join() {
 	const navigate = useNavigate();
@@ -48,8 +55,10 @@ function Join() {
 				placeholder='사용자 이름을 입력하세요.'
 				onChange={(e) => setName(e.target.value)}
 			/>
-			<button onClick={() => navigate(-1)}>취소</button>
-			<button onClick={handleJoin}>회원가입</button>
+			<BtnSet>
+				<button onClick={() => navigate(-1)}>취소</button>
+				<button onClick={handleJoin}>회원가입</button>
+			</BtnSet>
 		</Layout>
 	);
 }
