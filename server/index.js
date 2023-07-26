@@ -13,6 +13,8 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 
 //커뮤니티 전용 라우터 추가
 app.use('/api/community', require('./router/communityRouter.js'));
+//유저전용 라우터 추가
+app.use('/api/user', require('./router/userRouter.js'));
 
 app.listen(port, () => {
 	//db설정하기 위해 미리 설정해둠
