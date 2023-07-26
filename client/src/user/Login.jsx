@@ -3,6 +3,7 @@ import Layout from '../common/Layout';
 import { useNavigate } from 'react-router-dom';
 import firebase from '../firebase';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const BtnSet = styled.nav`
 	display: flex;
@@ -11,6 +12,7 @@ const BtnSet = styled.nav`
 `;
 
 function Login() {
+	const user = useSelector((store) => store.user);
 	const navigate = useNavigate();
 	const [Email, setEmail] = useState('');
 	const [Pwd, setPwd] = useState('');
@@ -34,6 +36,10 @@ function Login() {
 	useEffect(() => {
 		console.log(Err);
 	}, [Err]);
+
+	useEffect(() => {
+		if (user.uid !== '') navigate('/');
+	}, [navigate, user]);
 
 	return (
 		<Layout name={'Login'}>

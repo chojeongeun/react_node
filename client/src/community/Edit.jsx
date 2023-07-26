@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Layout from '../common/Layout';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 /*
   글수정 흐름
@@ -18,6 +19,7 @@ function Edit() {
 	const [Title, setTitle] = useState('');
 	const [Content, setContent] = useState('');
 	const [Detail, setDetail] = useState({});
+	const user = useSelector((store) => store.user);
 
 	const handleUpdate = () => {
 		if (Title.trim() === '' || Content.trim() === '') return alert('모든 항목을 입력하세요.');
@@ -38,13 +40,14 @@ function Edit() {
 	};
 
 	useEffect(() => {
+		if (user.uid === '') navigate('/');
 		axios.post('/api/community/detail', params).then((res) => {
 			if (res.data.success) {
 				console.log(res.data.detail);
 				setDetail(res.data.detail);
 			}
 		});
-	}, []);
+	}, [navigate, user, params]);
 
 	useEffect(() => {
 		//서버쪽으로 새로운 응답이 넘어오자마자

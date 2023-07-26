@@ -2,8 +2,10 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Create() {
+	const user = useSelector((store) => store.user);
 	const navigate = useNavigate();
 	const [Tit, setTit] = useState('');
 	const [Con, setCon] = useState('');
@@ -21,6 +23,10 @@ function Create() {
 				alert('글 저장에 실패했습니다');
 			});
 	};
+
+	useEffect(() => {
+		if (user.uid === '') navigate('/');
+	}, [navigate, user]);
 
 	return (
 		<Layout name={'Post'}>
